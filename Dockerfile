@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 
-ARG RUNNER_VERSION=2.322.0
+ARG RUNNER_VERSION=2.333.1
 ARG PHP_VERSION=8.5
 ARG PLAYWRIGHT_VERSION=1.57.0
 ARG TARGETARCH=x64
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     gnupg \
     jq \
-    libicu-dev \
+    libicu74 \
     lsb-release \
     rsync \
     software-properties-common \
@@ -92,7 +92,6 @@ RUN mkdir -p /home/runner/actions-runner \
        "https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-${TARGETARCH}-${RUNNER_VERSION}.tar.gz" \
     && tar xzf runner.tar.gz \
     && rm runner.tar.gz \
-    && ./bin/installdependencies.sh \
     && chown -R runner:runner /home/runner/actions-runner
 
 # ─── Persistent config directory (for runner credentials) ─────────────────────

@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        RUNNER_VERSION: "2.322.0"
+        RUNNER_VERSION: "2.333.1"
         PHP_VERSION: "8.5"
         PLAYWRIGHT_VERSION: "1.57.0"
     environment:
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       args:
-        RUNNER_VERSION: "2.322.0"
+        RUNNER_VERSION: "2.333.1"
         PHP_VERSION: "8.5"
         PLAYWRIGHT_VERSION: "1.57.0"
     environment:
