@@ -1,0 +1,45 @@
+services:
+  runner-1:
+    build:
+      context: .
+      args:
+        RUNNER_VERSION: "2.322.0"
+        PHP_VERSION: "8.5"
+        PLAYWRIGHT_VERSION: "1.57.0"
+    environment:
+      GITHUB_URL: ${GITHUB_URL}
+      RUNNER_TOKEN: ${RUNNER_TOKEN_1}
+      RUNNER_NAME: ${RUNNER_NAME_1:-runner-1}
+      RUNNER_LABELS: ${RUNNER_LABELS:-self-hosted,linux,x64}
+    volumes:
+      - cache-data:/cache
+      - runner-1-config:/home/runner/runner-config
+      - runner-1-work:/home/runner/_work
+    restart: unless-stopped
+    stop_grace_period: 30s
+
+  runner-2:
+    build:
+      context: .
+      args:
+        RUNNER_VERSION: "2.322.0"
+        PHP_VERSION: "8.5"
+        PLAYWRIGHT_VERSION: "1.57.0"
+    environment:
+      GITHUB_URL: ${GITHUB_URL}
+      RUNNER_TOKEN: ${RUNNER_TOKEN_2}
+      RUNNER_NAME: ${RUNNER_NAME_2:-runner-2}
+      RUNNER_LABELS: ${RUNNER_LABELS:-self-hosted,linux,x64}
+    volumes:
+      - cache-data:/cache
+      - runner-2-config:/home/runner/runner-config
+      - runner-2-work:/home/runner/_work
+    restart: unless-stopped
+    stop_grace_period: 30s
+
+volumes:
+  cache-data:
+  runner-1-config:
+  runner-1-work:
+  runner-2-config:
+  runner-2-work:
