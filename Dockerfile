@@ -76,10 +76,9 @@ RUN curl -fsSL https://bun.sh/install | bash \
 # ─── Composer ──────────────────────────────────────────────────────────────────
 RUN curl -fsSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# ─── Playwright browsers ──────────────────────────────────────────────────────
+# ─── Playwright ───────────────────────────────────────────────────────────────
+# System deps only — browser binaries are cached on the volume via save-cache
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright-browsers
-RUN npx playwright@${PLAYWRIGHT_VERSION} install --with-deps
-# Skip browser download during bun/npm install — browsers are pre-installed above
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 # ─── Runner user ───────────────────────────────────────────────────────────────

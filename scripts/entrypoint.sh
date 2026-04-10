@@ -13,9 +13,9 @@ CONFIG_DIR="/home/runner/runner-config"
 RUNNER_DIR="/home/runner/actions-runner"
 
 # ─── Ensure directories exist with correct ownership ─────────────────────────
-mkdir -p /cache/node_modules /cache/vendor /cache/.locks
-sudo mkdir -p "$RUNNER_WORKDIR"
-sudo chown -R runner:runner "$RUNNER_WORKDIR"
+mkdir -p /cache/node_modules /cache/vendor /cache/playwright /cache/.locks
+sudo mkdir -p "$RUNNER_WORKDIR" "$PLAYWRIGHT_BROWSERS_PATH"
+sudo chown -R runner:runner "$RUNNER_WORKDIR" "$PLAYWRIGHT_BROWSERS_PATH"
 
 # ─── Start cron for cache cleanup ─────────────────────────────────────────────
 sudo service cron start

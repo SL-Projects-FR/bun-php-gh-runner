@@ -1,15 +1,17 @@
 #!/bin/bash
 set -euo pipefail
 
-# Usage: save-cache <type> <lockfile>
+# Usage: save-cache <type> <lockfile> [source_dir]
 # Example: save-cache node_modules bun.lock
 #          save-cache vendor composer.lock
+#          save-cache playwright .pw-version /opt/playwright-browsers
 
-TYPE="${1:?Usage: save-cache <type> <lockfile>}"
-LOCKFILE="${2:?Usage: save-cache <type> <lockfile>}"
+TYPE="${1:?Usage: save-cache <type> <lockfile> [source_dir]}"
+LOCKFILE="${2:?Usage: save-cache <type> <lockfile> [source_dir]}"
+SOURCE_DIR="${3:-./$TYPE}"
 
-if [ ! -d "./$TYPE" ]; then
-    echo "::warning::Directory './$TYPE' not found, nothing to cache"
+if [ ! -d "$SOURCE_DIR" ]; then
+    echo "::warning::Directory '$SOURCE_DIR' not found, nothing to cache"
     exit 1
 fi
 
@@ -46,7 +48,7 @@ mkdir -p /cache/.locks
     rm -rf "$TEMP_DIR"
     mkdir -p "$TEMP_DIR"
 
-    cp -a "./$TYPE/." "$TEMP_DIR/"
+    cp -a "$SOURCE_DIR/." "$TEMP_DIR/"
     date +%s > "$TEMP_DIR/.last-used"
 
     mv "$TEMP_DIR" "$CACHE_DIR"
