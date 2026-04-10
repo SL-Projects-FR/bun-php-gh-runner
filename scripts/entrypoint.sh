@@ -12,8 +12,10 @@ RUNNER_GROUP="${RUNNER_GROUP:-Default}"
 CONFIG_DIR="/home/runner/runner-config"
 RUNNER_DIR="/home/runner/actions-runner"
 
-# ─── Ensure cache directories exist ───────────────────────────────────────────
+# ─── Ensure directories exist with correct ownership ─────────────────────────
 mkdir -p /cache/node_modules /cache/vendor /cache/.locks
+sudo mkdir -p "$RUNNER_WORKDIR"
+sudo chown -R runner:runner "$RUNNER_WORKDIR"
 
 # ─── Start cron for cache cleanup ─────────────────────────────────────────────
 sudo service cron start
