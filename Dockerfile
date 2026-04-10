@@ -79,6 +79,8 @@ RUN curl -fsSL https://getcomposer.org/installer | php -- --install-dir=/usr/loc
 # ─── Playwright browsers ──────────────────────────────────────────────────────
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright-browsers
 RUN npx playwright@${PLAYWRIGHT_VERSION} install --with-deps
+# Skip browser download during bun/npm install — browsers are pre-installed above
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 # ─── Runner user ───────────────────────────────────────────────────────────────
 RUN useradd -m -u 1001 -s /bin/bash runner \
