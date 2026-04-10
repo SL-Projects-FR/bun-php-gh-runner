@@ -55,7 +55,6 @@ RUN add-apt-repository ppa:ondrej/php -y \
     php${PHP_VERSION}-imagick \
     php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-mysql \
-    php${PHP_VERSION}-opcache \
     php${PHP_VERSION}-pcov \
     php${PHP_VERSION}-redis \
     php${PHP_VERSION}-sqlite3 \
